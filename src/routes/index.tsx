@@ -6,7 +6,7 @@
  *   @ai_context: Main dashboard requiring authentication
  */
 
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { AppSidebar } from "@/components/app-sidebar";
 import { ModeToggle } from "@/components/mode-toggle";
 import { UserNav } from "@/components/user-nav";
@@ -20,7 +20,7 @@ import { isAuthenticated } from "@/lib/auth";
 export const Route = createFileRoute("/")({
   beforeLoad: () => {
     if (!isAuthenticated()) {
-      throw { redirect: { to: "/login" } };
+      throw redirect({ to: "/login" });
     }
   },
   component: DashboardPage,
@@ -45,7 +45,8 @@ function DashboardPage() {
           <div className="rounded-lg border bg-card p-6">
             <h2 className="text-2xl font-bold">Welcome to ClientIQ</h2>
             <p className="mt-2 text-muted-foreground">
-              You are now logged in. Select a page from the sidebar to get started.
+              You are now logged in. Select a page from the sidebar to get
+              started.
             </p>
           </div>
         </main>

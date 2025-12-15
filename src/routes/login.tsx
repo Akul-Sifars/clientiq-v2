@@ -7,11 +7,11 @@
  */
 
 import { useState } from "react";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useForm } from "react-hook-form";
-import { Eye, EyeOff, Mail } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Controller, useForm } from 'react-hook-form';
+import { Eye, EyeOff, Mail } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -19,23 +19,23 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import {
   Field,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@/components/ui/field";
-import { ModeToggle } from "@/components/mode-toggle";
-import { useTheme } from "@/components/theme-provider";
-import { login, isAuthenticated } from "@/lib/auth";
-import { loginSchema, type LoginFormData } from "@/lib/schemas/auth";
+} from '@/components/ui/field';
+import { ModeToggle } from '@/components/mode-toggle';
+import { useTheme } from '@/components/theme-provider';
+import { login, isAuthenticated } from '@/lib/auth';
+import { loginSchema, type LoginFormData } from '@/lib/schemas/auth';
 
-export const Route = createFileRoute("/login")({
+export const Route = createFileRoute('/login')({
   beforeLoad: () => {
     if (isAuthenticated()) {
-      throw { redirect: { to: "/" } };
+      throw redirect({ to: '/' });
     }
   },
   component: LoginPage,

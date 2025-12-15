@@ -6,26 +6,26 @@
  *   @ai_context: Case management page requiring authentication
  */
 
-import { createFileRoute } from '@tanstack/react-router'
-import { AppSidebar } from '@/components/app-sidebar'
-import { ModeToggle } from '@/components/mode-toggle'
-import { UserNav } from '@/components/user-nav'
+import { createFileRoute, redirect } from '@tanstack/react-router';
+import { AppSidebar } from '@/components/app-sidebar';
+import { ModeToggle } from '@/components/mode-toggle';
+import { UserNav } from '@/components/user-nav';
 import {
   SidebarProvider,
   SidebarInset,
   SidebarTrigger,
-} from '@/components/ui/sidebar'
-import { isAuthenticated } from '@/lib/auth'
-import { Scale } from 'lucide-react'
+} from '@/components/ui/sidebar';
+import { isAuthenticated } from '@/lib/auth';
+import { Scale } from 'lucide-react';
 
 export const Route = createFileRoute('/cases')({
   beforeLoad: () => {
     if (!isAuthenticated()) {
-      throw { redirect: { to: '/login' } }
+      throw redirect({ to: '/login' });
     }
   },
   component: CasesPage,
-})
+});
 
 function CasesPage() {
   return (

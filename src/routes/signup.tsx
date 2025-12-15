@@ -6,10 +6,10 @@
  *   @ai_context: Handles new user registration
  */
 
-import { useState } from "react";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Eye, EyeOff, Mail, User, Check, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState } from 'react';
+import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
+import { Eye, EyeOff, Mail, User, Check, X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -17,18 +17,18 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
-import { ModeToggle } from "@/components/mode-toggle";
-import { useTheme } from "@/components/theme-provider";
-import { isAuthenticated } from "@/lib/auth";
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
+import { ModeToggle } from '@/components/mode-toggle';
+import { useTheme } from '@/components/theme-provider';
+import { isAuthenticated } from '@/lib/auth';
 
-export const Route = createFileRoute("/signup")({
+export const Route = createFileRoute('/signup')({
   beforeLoad: () => {
     if (isAuthenticated()) {
-      throw { redirect: { to: "/" } };
+      throw redirect({ to: '/' });
     }
   },
   component: SignupPage,
