@@ -1,15 +1,16 @@
 /**
  * FILE OVERVIEW:
- *   Purpose: Root application component with sidebar layout
- *   Key Concepts: React, Shadcn Sidebar, Layout, Theme Provider
+ *   Purpose: Root application component with sidebar layout and PWA update prompt
+ *   Key Concepts: React, Shadcn Sidebar, Layout, Theme Provider, PWA
  *   Module Type: Component
- *   @ai_context: Entry point component for ClientIQ application
+ *   @ai_context: Entry point component for ClientIQ application with PWA support
  */
 
 import { AppSidebar } from "@/components/app-sidebar";
 import { ModeToggle } from "@/components/mode-toggle";
 import { ThemeProvider } from "@/components/theme-provider";
 import { UserNav } from "@/components/user-nav";
+import { PWAUpdatePrompt } from "@/components/pwa-update-prompt";
 import {
   SidebarProvider,
   SidebarInset,
@@ -42,6 +43,7 @@ function App() {
           </main>
         </SidebarInset>
       </SidebarProvider>
+      <PWAUpdatePrompt />
     </ThemeProvider>
   );
 }
