@@ -6,22 +6,31 @@
  *   @ai_context: Client management page requiring authentication
  */
 
-import { createFileRoute, redirect } from '@tanstack/react-router';
-import { AppSidebar } from '@/components/app-sidebar';
-import { ModeToggle } from '@/components/mode-toggle';
-import { UserNav } from '@/components/user-nav';
+import { createFileRoute, redirect } from "@tanstack/react-router";
+import { AppSidebar } from "@/components/app-sidebar";
+import { ModeToggle } from "@/components/mode-toggle";
+import { UserNav } from "@/components/user-nav";
 import {
   SidebarProvider,
   SidebarInset,
   SidebarTrigger,
-} from '@/components/ui/sidebar';
-import { isAuthenticated } from '@/lib/auth';
-import { Users } from 'lucide-react';
+} from "@/components/ui/sidebar";
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+  EmptyContent,
+} from "@/components/ui/empty";
+import { Button } from "@/components/ui/button";
+import { isAuthenticated } from "@/lib/auth";
+import { Users } from "lucide-react";
 
-export const Route = createFileRoute('/clients')({
+export const Route = createFileRoute("/clients")({
   beforeLoad: () => {
     if (!isAuthenticated()) {
-      throw redirect({ to: '/login' });
+      throw redirect({ to: "/login" });
     }
   },
   component: ClientsPage,
@@ -43,13 +52,27 @@ function ClientsPage() {
           </div>
         </header>
         <main className="flex-1 p-6">
-          <div className="rounded-lg border bg-card p-8 text-center">
-            <Users className="mx-auto size-12 text-muted-foreground" />
-            <h2 className="mt-4 text-2xl font-bold">Clients</h2>
-            <p className="mt-2 text-muted-foreground">
-              Manage your client relationships and contact information.
-            </p>
-          </div>
+          <Empty>
+            <EmptyHeader>
+              <EmptyMedia variant="icon">
+                <Users />
+              </EmptyMedia>
+              <EmptyTitle>No clients yet</EmptyTitle>
+              <EmptyDescription>
+                Get started by adding your first client. Manage relationships,
+                contact information, and case history all in one place.
+              </EmptyDescription>
+            </EmptyHeader>
+            <EmptyContent>
+              <Button
+                onClick={() => {
+                  console.log("Add client clicked");
+                }}
+              >
+                Add Client
+              </Button>
+            </EmptyContent>
+          </Empty>
         </main>
       </SidebarInset>
     </SidebarProvider>

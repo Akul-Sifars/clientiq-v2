@@ -6,22 +6,31 @@
  *   @ai_context: Case management page requiring authentication
  */
 
-import { createFileRoute, redirect } from '@tanstack/react-router';
-import { AppSidebar } from '@/components/app-sidebar';
-import { ModeToggle } from '@/components/mode-toggle';
-import { UserNav } from '@/components/user-nav';
+import { createFileRoute, redirect } from "@tanstack/react-router";
+import { AppSidebar } from "@/components/app-sidebar";
+import { ModeToggle } from "@/components/mode-toggle";
+import { UserNav } from "@/components/user-nav";
 import {
   SidebarProvider,
   SidebarInset,
   SidebarTrigger,
-} from '@/components/ui/sidebar';
-import { isAuthenticated } from '@/lib/auth';
-import { Scale } from 'lucide-react';
+} from "@/components/ui/sidebar";
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+  EmptyContent,
+} from "@/components/ui/empty";
+import { Button } from "@/components/ui/button";
+import { isAuthenticated } from "@/lib/auth";
+import { Scale } from "lucide-react";
 
-export const Route = createFileRoute('/cases')({
+export const Route = createFileRoute("/cases")({
   beforeLoad: () => {
     if (!isAuthenticated()) {
-      throw redirect({ to: '/login' });
+      throw redirect({ to: "/login" });
     }
   },
   component: CasesPage,
@@ -43,15 +52,29 @@ function CasesPage() {
           </div>
         </header>
         <main className="flex-1 p-6">
-          <div className="rounded-lg border bg-card p-8 text-center">
-            <Scale className="mx-auto size-12 text-muted-foreground" />
-            <h2 className="mt-4 text-2xl font-bold">Cases</h2>
-            <p className="mt-2 text-muted-foreground">
-              Track and manage legal cases, documents, and proceedings.
-            </p>
-          </div>
+          <Empty>
+            <EmptyHeader>
+              <EmptyMedia variant="icon">
+                <Scale />
+              </EmptyMedia>
+              <EmptyTitle>No cases yet</EmptyTitle>
+              <EmptyDescription>
+                Start tracking your legal cases, documents, and proceedings.
+                Keep everything organized and easily accessible.
+              </EmptyDescription>
+            </EmptyHeader>
+            <EmptyContent>
+              <Button
+                onClick={() => {
+                  console.log("Create case clicked");
+                }}
+              >
+                Create Case
+              </Button>
+            </EmptyContent>
+          </Empty>
         </main>
       </SidebarInset>
     </SidebarProvider>
-  )
+  );
 }
