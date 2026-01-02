@@ -228,6 +228,28 @@
   .dark .bg-appbar {
     background-color: oklch(0.177 0.01 285);
   }
+
+  /* Shimmer Animation */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      oklch(0.96 0.002 247 / 0.4) 0%,
+      oklch(0.96 0.002 247 / 0.6) 50%,
+      oklch(0.96 0.002 247 / 0.4) 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+  }
+
+  .dark .shimmer {
+    background: linear-gradient(
+      90deg,
+      oklch(0.28 0.01 285 / 0.4) 0%,
+      oklch(0.28 0.01 285 / 0.6) 50%,
+      oklch(0.28 0.01 285 / 0.4) 100%
+    );
+    background-size: 1000px 100%;
+  }
 }
 
 @layer components {
@@ -272,5 +294,14 @@
       var(--gradient-end-hover) 100%
     );
     color: white;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
   }
 }

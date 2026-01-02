@@ -15,7 +15,15 @@ import {
   SidebarInset,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+} from "@/components/ui/empty";
 import { isAuthenticated } from "@/lib/auth";
+import { LayoutDashboard } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   beforeLoad: () => {
@@ -42,13 +50,18 @@ function DashboardPage() {
           </div>
         </header>
         <main className="flex-1 p-6">
-          <div className="rounded-lg border bg-card p-6">
-            <h2 className="text-2xl font-bold">Welcome to ClientIQ</h2>
-            <p className="mt-2 text-muted-foreground">
-              You are now logged in. Select a page from the sidebar to get
-              started.
-            </p>
-          </div>
+          <Empty>
+            <EmptyHeader>
+              <EmptyMedia variant="icon">
+                <LayoutDashboard />
+              </EmptyMedia>
+              <EmptyTitle>Welcome to ClientIQ</EmptyTitle>
+              <EmptyDescription>
+                Get started by managing your clients, cases, and FAQs. Use the
+                sidebar to navigate to different sections of the application.
+              </EmptyDescription>
+            </EmptyHeader>
+          </Empty>
         </main>
       </SidebarInset>
     </SidebarProvider>
